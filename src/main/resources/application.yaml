@@ -7,8 +7,9 @@ spring:
       bootstrap-servers: broker:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id:  user-consumer-group
+      group-id:  wikimedia-consumer-group
+      auto-offset-reset: latest
 
 app:
   kafka:
-    topic: user-topic
+    topic: wikimedia-topic
