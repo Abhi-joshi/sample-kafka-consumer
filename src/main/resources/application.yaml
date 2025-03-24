@@ -9,6 +9,9 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id:  wikimedia-consumer-group
       auto-offset-reset: latest
+  elasticsearch:
+    uris: http://localhost:9200
+
 
 app:
   kafka:
