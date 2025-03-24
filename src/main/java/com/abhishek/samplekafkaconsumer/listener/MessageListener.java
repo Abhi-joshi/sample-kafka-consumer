@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageListener {
 
-    private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessageListener.class);
     private final WikimediaService wikimediaService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -31,6 +31,8 @@ public class MessageListener {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        this.wikimediaService.save(result);
+        this.wikimediaService.save(result)
+                .subscribe(saved -> logger.info("Document saved: {}", saved),
+                        error -> logger.error("Error while saving: {}", String.valueOf(error)));
     }
 }
