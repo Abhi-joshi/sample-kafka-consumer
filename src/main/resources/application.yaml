@@ -10,7 +10,9 @@ spring:
       group-id:  wikimedia-consumer-group
       auto-offset-reset: latest
   elasticsearch:
-    uris: http://localhost:9200
+    uris: http://${ES_LOCAL_CONTAINER_NAME}:${ES_LOCAL_PORT}
+    username: elastic
+    password: ${ES_LOCAL_PASSWORD}
 
 
 app:

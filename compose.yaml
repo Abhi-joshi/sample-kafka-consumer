@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8082:8082"
+    env_file:
+      - ../elastic-start-local/.env
     networks:
       - app-network
 
