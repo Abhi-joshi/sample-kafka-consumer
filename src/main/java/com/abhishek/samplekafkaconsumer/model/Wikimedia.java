@@ -1,106 +1,68 @@
 package com.abhishek.samplekafkaconsumer.model;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(indexName = "wikimedia")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Wikimedia {
 
-    @Id
-    @JsonProperty("log_id")
-    private Long logId;
+    @JsonProperty("id")
+    private Long id;
 
-    @JsonProperty("$schema")
-    @Field(type = FieldType.Keyword)
-    private String schema;
-
-    @Field(type = FieldType.Nested)
-    private Meta meta;
-
-    @Field(type = FieldType.Keyword)
+    @JsonProperty("type")
     private String type;
 
-    @Field(type = FieldType.Integer)
+    @JsonProperty("namespace")
     private int namespace;
 
-    @Field(type = FieldType.Text)
+    @JsonProperty("title")
     private String title;
 
     @JsonProperty("title_url")
-    @Field(type = FieldType.Keyword)
     private String titleUrl;
 
-    @Field(type = FieldType.Text)
+    @JsonProperty("comment")
     private String comment;
 
-    @Field(type = FieldType.Long)
+    @JsonProperty("timestamp")
     private Long timestamp;
 
-    @Field(type = FieldType.Keyword)
+    @JsonProperty("user")
     private String user;
 
-    @Field(type = FieldType.Boolean)
+    @JsonProperty("bot")
     private boolean bot;
 
-    @JsonProperty("log_type")
-    @Field(type = FieldType.Keyword)
-    private String logType;
-
-    @JsonProperty("log_action")
-    @Field(type = FieldType.Keyword)
-    private String logAction;
-
-    @JsonProperty("log_params")
-    @Field(type = FieldType.Object)
-    private Object[] logParams;
-
-    @JsonProperty("log_action_comment")
-    @Field(type = FieldType.Text)
-    private String logActionComment;
+    @JsonProperty("notify_url")
+    private String notifyUrl;
 
     @JsonProperty("server_url")
-    @Field(type = FieldType.Keyword)
     private String serverUrl;
 
     @JsonProperty("server_name")
-    @Field(type = FieldType.Keyword)
     private String serverName;
 
     @JsonProperty("server_script_path")
-    @Field(type = FieldType.Keyword)
     private String serverScriptPath;
 
-    @Field(type = FieldType.Keyword)
+    @JsonProperty("wiki")
     private String wiki;
 
-    @Field(type = FieldType.Text)
-    private String parsedcomment;
+    @JsonProperty("parsedcomment")
+    private String parsedComment;
 
-    public Long getLogId() {
-        return logId;
+    @JsonProperty("meta")
+    private Meta meta;
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setLogId(Long logId) {
-        this.logId = logId;
-    }
-
-    public String getSchema() {
-        return schema;
-    }
-
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-
-    public Meta getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Meta meta) {
-        this.meta = meta;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -167,36 +129,12 @@ public class Wikimedia {
         this.bot = bot;
     }
 
-    public String getLogType() {
-        return logType;
+    public String getNotifyUrl() {
+        return notifyUrl;
     }
 
-    public void setLogType(String logType) {
-        this.logType = logType;
-    }
-
-    public String getLogAction() {
-        return logAction;
-    }
-
-    public void setLogAction(String logAction) {
-        this.logAction = logAction;
-    }
-
-    public Object[] getLogParams() {
-        return logParams;
-    }
-
-    public void setLogParams(Object[] logParams) {
-        this.logParams = logParams;
-    }
-
-    public String getLogActionComment() {
-        return logActionComment;
-    }
-
-    public void setLogActionComment(String logActionComment) {
-        this.logActionComment = logActionComment;
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
     }
 
     public String getServerUrl() {
@@ -231,43 +169,61 @@ public class Wikimedia {
         this.wiki = wiki;
     }
 
-    public String getParsedcomment() {
-        return parsedcomment;
+    public String getParsedComment() {
+        return parsedComment;
     }
 
-    public void setParsedcomment(String parsedcomment) {
-        this.parsedcomment = parsedcomment;
+    public void setParsedComment(String parsedComment) {
+        this.parsedComment = parsedComment;
     }
 
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
+
+    // Inner class for Meta
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Meta {
 
-        @Field(type = FieldType.Keyword)
+        @JsonProperty("id")
+        private String metaId;
+
+        @JsonProperty("uri")
         private String uri;
 
         @JsonProperty("request_id")
-        @Field(type = FieldType.Keyword)
         private String requestId;
 
-        @Field(type = FieldType.Keyword)
-        private String id;
-
-        @Field(type = FieldType.Keyword)
+        @JsonProperty("dt")
         private String dt;
 
-        @Field(type = FieldType.Keyword)
+        @JsonProperty("domain")
         private String domain;
 
-        @Field(type = FieldType.Keyword)
+        @JsonProperty("stream")
         private String stream;
 
-        @Field(type = FieldType.Keyword)
+        @JsonProperty("topic")
         private String topic;
 
-        @Field(type = FieldType.Integer)
+        @JsonProperty("partition")
         private int partition;
 
-        @Field(type = FieldType.Long)
-        private long offset;
+        @JsonProperty("offset")
+        private Long offset;
+
+        // Getters and Setters
+        public String getMetaId() {
+            return metaId;
+        }
+
+        public void setMetaId(String metaId) {
+            this.metaId = metaId;
+        }
 
         public String getUri() {
             return uri;
@@ -283,14 +239,6 @@ public class Wikimedia {
 
         public void setRequestId(String requestId) {
             this.requestId = requestId;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
         }
 
         public String getDt() {
@@ -333,11 +281,11 @@ public class Wikimedia {
             this.partition = partition;
         }
 
-        public long getOffset() {
+        public Long getOffset() {
             return offset;
         }
 
-        public void setOffset(long offset) {
+        public void setOffset(Long offset) {
             this.offset = offset;
         }
     }
