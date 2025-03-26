@@ -4,6 +4,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    image: sample-kafka-consumer:latest
     ports:
       - "8082:8082"
     env_file:
