@@ -11,7 +11,7 @@ data:
     spring:
       kafka:
         consumer:
-          bootstrap-servers: kafka-service:9092
+          bootstrap-servers: kafka-service.kafka.svc.cluster.local:9092
           key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
           value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
           group-id: wikimedia-consumer-group
@@ -23,7 +23,7 @@ data:
             enabled: true
 
       elasticsearch:
-        uris: https://quickstart-es-http.default.svc.cluster.local:9200
+        uris: https://elasticsearch-dev-es-http.elasticsearch.svc.cluster.local:9200
         username: elastic
         password: ${ELASTIC_PASSWORD}
 
