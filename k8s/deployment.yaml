@@ -27,7 +27,7 @@ spec:
             - name: ELASTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: es-credentials
+                  name: elasticsearch-dev-es-elastic-user
                   key: ELASTIC_PASSWORD
           volumeMounts:
             - name: config-volume
