@@ -23,7 +23,7 @@ data:
             enabled: true
 
       elasticsearch:
-        uris: https://elasticsearch-dev-es-http.elasticsearch.svc.cluster.local:9200
+        uris: http://elasticsearch-dev-es-http.elasticsearch.svc.cluster.local:9200
         username: elastic
         password: ${ELASTIC_PASSWORD}
 
