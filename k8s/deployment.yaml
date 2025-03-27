@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kubernetes-dashboard
+  labels:
+    app: sample-kafka-consumer
+  name: sample-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: sample-kafka-consumer
+    spec:
+      containers:
+        - image: sample-kafka-consumer:latest
+          imagePullPolicy: IfNotPresent
+          name: sample-kafka-consumer
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SPRING_CONFIG_LOCATION
+              value: "file:/config/application.yaml"
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: es-credentials
+                  key: ELASTIC_PASSWORD
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config/application.yaml
+              subPath: application.yaml
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8082
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8082
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sample-kafka-consumer-config

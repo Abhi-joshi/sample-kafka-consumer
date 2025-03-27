@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-kafka-consumer-config
+  namespace: kubernetes-dashboard
+data:
+  application.yaml: |-
+    server:
+      port: 8082
+
+    spring:
+      kafka:
+        consumer:
+          bootstrap-servers: kafka-service:9092
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          group-id: wikimedia-consumer-group
+          auto-offset-reset: latest
+
+      data:
+        elasticsearch:
+          repositories:
+            enabled: true
+
+      elasticsearch:
+        uris: https://quickstart-es-http.default.svc.cluster.local:9200
+        username: elastic
+        password: ${ELASTIC_PASSWORD}
+
+    app:
+      kafka:
+        topic: wikimedia-topic
