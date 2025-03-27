@@ -24,11 +24,6 @@ spec:
           env:
             - name: SPRING_CONFIG_LOCATION
               value: "file:/config/application.yaml"
-            - name: ELASTIC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: elasticsearch-dev-es-elastic-user
-                  key: ELASTIC_PASSWORD
           volumeMounts:
             - name: config-volume
               mountPath: /config/application.yaml

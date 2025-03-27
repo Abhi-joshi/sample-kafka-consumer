@@ -25,7 +25,7 @@ data:
       elasticsearch:
         uris: http://elasticsearch-dev-es-http.elasticsearch.svc.cluster.local:9200
         username: elastic
-        password: ${ELASTIC_PASSWORD}
+        password: 6fL40Ytd792W2v84EIRRCcL0
 
     app:
       kafka:
